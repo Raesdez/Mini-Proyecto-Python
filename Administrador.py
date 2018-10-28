@@ -2,7 +2,6 @@
 import Datos
 import os
 
-
 def viewProducts():
     while True:
         answer = input("Indique el tipo de producto que desea consultar (i: ingrediente, t: tamano): ")
@@ -10,25 +9,17 @@ def viewProducts():
         if(answer == "I" or answer == "i"):
             lists = Datos.ingredientsList()
             print("Mostrando todos los ingredientes: ")
-            print("----------------------------------")
         elif(answer == "T" or answer == "t"):
             lists = Datos.sizesList()
             print("Mostrando todos los tamanos de pizza: ")
-            print("----------------------------------")
         else:
             print("Seleccione una opcion valida")
             continue
 
-        #Print the attributes of the elements on the list
-        map(lambda x: print(x.id,' || ',x.nombre,' || ',x.precio),lists)
-        for x in lists:
-            print(x.id,' || ',x.nombre,' || ',x.precio)
-
-        print("----------------------------------")
+        __printList(lists)
         print("")
         input("Presione cualquier tecla para volver")
         break
-
 
 def addProduct():
     while True:
@@ -54,9 +45,35 @@ def addProduct():
         input("Producto agregado, presione cualquier tecla para continuar")
         break
 
-
 def deleteProduct():
-    print()
+    while True:
+        answer = input("Indique el tipo de producto que desea eliminar (i: ingrediente, t: tamano): ")
+        print("")
+        if(answer == "I" or answer == "i"):
+            lists = Datos.ingredientsList()
+            func = Datos.deleteIngredient
+            print("Mostrando todos los ingredientes: ")
+        elif(answer == "T" or answer == "t"):
+            lists = Datos.sizesList()
+            func = Datos.deleteSize
+            print("Mostrando todos los tamanos de pizza: ")
+        else:
+            print("Seleccione una opcion valida")
+            continue
+
+        __printList(lists)
+        print("")
+
+        id = input("Indique el Id del producto a eliminar")
+        product = __searchById(lists,id)
+        if(product != None):
+            func(product)
+        else:
+            print("Seleccione una opcion valida")
+            continue
+
+        input("Producto eliminado, presione cualquier tecla para continuar: ")
+        break
 
 def modifyProduct():
     print("En construccion")
@@ -74,7 +91,21 @@ def exit():
         else:
             print("Seleccione una opcion valida")
 
-#Main
+#-------------------------  Private  ---------------------------------
+def __printList(lists):
+    print("----------------------------------")
+    i = 0
+    for x in lists:
+        i+= 1
+        print(i,":",x.id,',',x.nombre,',',x.precio)
+    print("----------------------------------")
+
+def __searchById(lists,id):
+    for product in lists:
+        if product.id == id:
+            return product
+    return None
+#-------------------------  Main  ---------------------------------
 switcher = {
         1: viewProducts,
         2: addProduct,

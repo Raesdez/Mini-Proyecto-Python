@@ -20,12 +20,18 @@ def saveIngredient(new_ingredient):
 def ingredientsList():
     return __listOfObjects(ingredientsFile)
 
+def deleteIngredient(ingredient_to_erase):
+    return __deleteObject(ingredient_to_erase,ingredientsFile)
+
 #Sizes
 def saveSize(new_size):
     return __saveObject(new_size,sizesFile)
 
 def sizesList():
     return __listOfObjects(sizesFile)
+
+def deleteSize(size_to_erase):
+    return __deleteObject(ingredient_to_erase,ingredientsFile)
 
 #---------------------------------------------------------------------------
 
@@ -64,7 +70,7 @@ def __listOfObjects(file_name):
 """ Summary:    Searches the list of object, deletes the object searching it by id and then saves the list in file
     Parameters: object: the object to be deleted, file_name: the name of the file
     Return:     0: if everything ok, 9:unexpected error"""
-def __eliminateObject(object,file_name):
+def __deleteObject(object,file_name):
     #try:
          #Get stored list
          lists = __listOfObjects(file_name)
