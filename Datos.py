@@ -11,6 +11,23 @@ ingredientsFile = "ingredientes"
 sizesFile = "tamanos"
 #---------------------------------------------------
 
+#----------------------- Public Service Methods ---------------------
+
+#Ingredients
+def saveIngredient(new_ingredient):
+    return __saveObject(new_ingredient,ingredientsFile)
+
+def ingredientsList():
+    return __listOfObjects(ingredientsFile)
+
+#Sizes
+def saveSize(new_size):
+    return __saveObject(new_size,sizesFile)
+
+def sizesList():
+    return __listOfObjects(sizesFile)
+
+#---------------------------------------------------------------------------
 
 #-------------------------- Private methods -------------------------------
 """ Summary:    Stores an object in the stated file
@@ -19,10 +36,10 @@ sizesFile = "tamanos"
 def __saveObject(new_object,file_name):
     try:
         #Get stored list
-        list = listOfObjects(file_name)
+        list = __listOfObjects(file_name)
 
         #Check if the id is already on the list
-        if(not isIdDuplicated(list,new_object)):
+        if(not __isIdDuplicated(list,new_object)):
             #Append the new object to the list
             list.append(new_object)
             #Open file and save the list
@@ -44,10 +61,13 @@ def __listOfObjects(file_name):
         list = []
     return list
 
+""" Summary:    Searches the list of object, deletes the object searching it by id and then saves the list in file
+    Parameters: object: the object to be deleted, file_name: the name of the file
+    Return:     0: if everything ok, 9:unexpected error"""
 def __eliminateObject(object,file_name):
-    # try:
+    #try:
          #Get stored list
-         lists = listOfObjects(file_name)
+         lists = __listOfObjects(file_name)
 
          #Apply filter to generate a list with the objects that dont have the object id
          lists = list(filter(lambda x: x.id != object.id,lists))
@@ -56,9 +76,9 @@ def __eliminateObject(object,file_name):
          #Open file and save the list
          with open(file_name, 'wb') as file:
                  pickle.dump(lists,file)
-
+         return 0
      #except:
-    #     return 9
+         #return 9
 
 """ Summary:    Checks if the id of the new object exist in the file
     Parameters: list: the list of objects, new_object: the new object to check if exists
@@ -69,22 +89,6 @@ def __isIdDuplicated(list,new_object):
             return True
 
     return False
-
-#---------------------------------------------------------------------------
-
-#----------------------- Public Service Methods ---------------------
-
-def saveIngredient(new_ingredient):
-    return saveObject(new_ingredient,ingredientsFile)
-
-def ingredientsList():
-    return listOfObjects(ingredientsFile)
-
-def saveSize(new_size):
-    return saveObject(new_size,sizesFile)
-
-def sizesList():
-    return listOfObjects(sizesFile)
 
 #---------------------------------------------------------------------------
 
@@ -106,8 +110,8 @@ if (saveIngredient(ingrediente) == 1):
 else:
     print("La lista de productos actuales")
     imprimirIngredientes(ingredientsList())
-    print("Eliminando ",ingrediente.nombre)
-    eliminateObject(ingrediente,ingredientsFile)
-    imprimirIngredientes(ingredientsList())
+    #print("Eliminando ",ingrediente.nombre)
+    #__eliminateObject(ingrediente,ingredientsFile)
+    #imprimirIngredientes(ingredientsList())
 
 #print("Total de precio de los productos",reduce((lambda x, y: x + y),map(lambda x: x.precio, ingredientsList())))
