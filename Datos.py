@@ -98,20 +98,20 @@ def imprimirIngredientes(lista):
         i+=1
         print(i,": ",ingrediente.id,", ",ingrediente.nombre,", ",ingrediente.precio)
 
+if __name__ == '__main__':
+    ingrediente = Ingrediente("","",0.00)
+    ingrediente.nombre = str(input('Indique el nombre del producto: '))
+    ingrediente.id = str(input('Indique el codigo del producto: '))
+    ingrediente.precio = float(input('Indique el precio del producto: '))
+    print("")
 
-ingrediente = Ingrediente("","",0.00)
-ingrediente.nombre = str(input('Indique el nombre del producto: '))
-ingrediente.id = str(input('Indique el codigo del producto: '))
-ingrediente.precio = float(input('Indique el precio del producto: '))
-print("")
+    if (saveIngredient(ingrediente) == 1):
+        print("Ya existe este ingrediente")
+    else:
+        print("La lista de productos actuales")
+        imprimirIngredientes(ingredientsList())
+        #print("Eliminando ",ingrediente.nombre)
+        #__eliminateObject(ingrediente,ingredientsFile)
+        #imprimirIngredientes(ingredientsList())
 
-if (saveIngredient(ingrediente) == 1):
-    print("Ya existe este ingrediente")
-else:
-    print("La lista de productos actuales")
-    imprimirIngredientes(ingredientsList())
-    #print("Eliminando ",ingrediente.nombre)
-    #__eliminateObject(ingrediente,ingredientsFile)
-    #imprimirIngredientes(ingredientsList())
-
-#print("Total de precio de los productos",reduce((lambda x, y: x + y),map(lambda x: x.precio, ingredientsList())))
+    #print("Total de precio de los productos",reduce((lambda x, y: x + y),map(lambda x: x.precio, ingredientsList())))
