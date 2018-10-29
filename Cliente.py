@@ -72,8 +72,23 @@ def viewIngredientsPizza():
 
 
 #Main
+cont = False
+opc = False
 numeroPizza = 1
 ingredientes = []
-init()
-viewSizePizza()
-viewIngredientsPizza()
+while cont == False:
+    init()
+    viewSizePizza()
+    init()
+    viewIngredientsPizza()
+    while opc == False:
+        fin = input("Desea continuar? [s/n]: ")
+        if fin == 'n':
+            print('Gracias por su compra')
+            cont = True
+            break
+        elif fin == 's':
+            numeroPizza += 1
+            break
+        else:
+            print('Opción incorrecta')
