@@ -17,6 +17,12 @@ def __printList(lists):
         print(i,":",x.nombre,' BsS.',x.precio,' (',x.id,') ')
     print("----------------------------------")
 
+def __searchById(lists,id):
+    for product in lists:
+        if product.id == id:
+            return product
+    return None
+
 def init():
     clear()
     print("*************************")
@@ -37,7 +43,7 @@ def validation(y, lists):
     return False
 
 #Selection of the size of the pizza
-def viewSizePizza():
+def view_size_pizza():
     valid = False
     print('Tamaños disponibles:')
     listSizePizza = Datos.sizesList()
@@ -45,11 +51,13 @@ def viewSizePizza():
     while valid == False:
         size = input('Seleccione un tamaño: ')
         valid = validation(size,listSizePizza)
+        objectSize = __searchById(listSizePizza,size)
         if valid == False:
             print('Seleccione un tamaño correcto')
+    return objectSize
 
 #Selection of Pizza ingredients
-def viewIngredientsPizza():
+def view_ingredientsp_izza():
     terminar = False
     valid = False
     ingredientes = []
@@ -62,12 +70,12 @@ def viewIngredientsPizza():
             terminar = True
         else:
             valid = validation(ingredient,listIngredientsPizza)
+            objectIngredient = __searchById(listIngredientsPizza,ingredient)
             if valid == False:
                 print('Seleccione un ingrediente correcto')
             else:
-                ingredientes.append(ingredient)
-
-
+                ingredientes.append(objectIngredient)
+    return ingredientes
 
 
 
@@ -75,12 +83,18 @@ def viewIngredientsPizza():
 cont = False
 opc = False
 numeroPizza = 1
-ingredientes = []
+total = 0
 while cont == False:
+    subtotal = 0
     init()
-    viewSizePizza()
+    objectSize = view_size_pizza()
     init()
-    viewIngredientsPizza()
+    ingredientes = view_ingredientsp_izza()
+    print("Usted seleccionó una pizza ",objectSize.nombre," con: ", end = "")
+    for x in ingredientes:
+        print(x.nombre, end = " ")
+    print("")
+    print("Subtotal a pagar por una pizza ",objectSize.nombre,": ")
     while opc == False:
         fin = input("Desea continuar? [s/n]: ")
         if fin == 'n':
