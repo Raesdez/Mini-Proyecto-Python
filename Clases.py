@@ -1,5 +1,3 @@
-from functools import reduce
-
 class Pizza:
 
     """ Clase para manejar las pizzas que ordene el cliente  """
@@ -7,7 +5,7 @@ class Pizza:
     ingredientes = []
     tamano = ""
 
-    def __init__(self, numero=0,ingredientes=[], tamanos=[]):
+    def __init__(self, numero=0,ingredientes=[], tamanos=""):
         self.numero = nombre
         self.ingredientes = precio
         self.tamanos = tamanos

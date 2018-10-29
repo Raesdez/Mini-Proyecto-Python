@@ -31,7 +31,7 @@ def sizesList():
     return __listOfObjects(sizesFile)
 
 def deleteSize(size_to_erase):
-    return __deleteObject(ingredient_to_erase,ingredientsFile)
+    return __deleteObject(size_to_erase,sizesFile)
 
 #---------------------------------------------------------------------------
 
@@ -71,20 +71,17 @@ def __listOfObjects(file_name):
     Parameters: object: the object to be deleted, file_name: the name of the file
     Return:     0: if everything ok, 9:unexpected error"""
 def __deleteObject(object,file_name):
-    #try:
+    try:
          #Get stored list
          lists = __listOfObjects(file_name)
-
          #Apply filter to generate a list with the objects that dont have the object id
          lists = list(filter(lambda x: x.id != object.id,lists))
-         print("La lista que cumplió la condición",lists)
-
          #Open file and save the list
          with open(file_name, 'wb') as file:
                  pickle.dump(lists,file)
          return 0
-     #except:
-         #return 9
+    except:
+         return 9
 
 """ Summary:    Checks if the id of the new object exist in the file
     Parameters: list: the list of objects, new_object: the new object to check if exists

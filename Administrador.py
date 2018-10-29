@@ -31,11 +31,15 @@ def addProduct():
         precio = float(input('Indique el precio del producto: '))
 
         if(answer == "I" or answer == "i"):
-            Datos.saveIngredient(Datos.Ingrediente(nombre,id,precio))
+            if(Datos.saveIngredient(Datos.Ingrediente(id,nombre,precio))==1):
+                print("Ya existe un ingrediente con este identificador, por favor intente nuevamente")
+                continue
             print()
 
         elif(answer == "T" or answer == "t"):
-            Datos.saveSize(Datos.Tamano(nombre,id,precio))
+            if(Datos.saveSize(Datos.Tamano(id,nombre,precio))):
+                print("Ya existe un tamano con este identificador, por favor intente nuevamente")
+                continue
             print()
         else:
             print("Seleccione una opcion valida")
@@ -64,7 +68,7 @@ def deleteProduct():
         __printList(lists)
         print("")
 
-        id = input("Indique el Id del producto a eliminar")
+        id = input("Indique el Id del producto a eliminar: ")
         product = __searchById(lists,id)
         if(product != None):
             func(product)
@@ -75,11 +79,7 @@ def deleteProduct():
         input("Producto eliminado, presione cualquier tecla para continuar: ")
         break
 
-def modifyProduct():
-    print("En construccion")
-
 def exit():
-    os.system('clear')
     while True:
         answer = input("Seguro que desea salir? [s/n]: ")
 
@@ -110,7 +110,6 @@ switcher = {
         1: viewProducts,
         2: addProduct,
         3: deleteProduct,
-        4: modifyProduct,
         0: exit,
     }
 
@@ -127,7 +126,6 @@ while True:
     print("1: Ver productos")
     print("2: Agregar un producto")
     print("3: Eliminar un producto")
-    print("4: Modificar un producto")
     print("0: Salir")
 
     #try:
