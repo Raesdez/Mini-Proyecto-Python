@@ -1,14 +1,14 @@
 import os
 import Datos
 
-#Limpia la pantalla
+#Clean screem
 def clear():
     if os.name == "posix":
         os.system ("clear")
     elif os.name == ("ce", "nt", "dos"):
         os.system ("cls")
 
-#Imprime la lista
+#Print list
 def __printList(lists):
     print("----------------------------------")
     i = 0
@@ -26,7 +26,7 @@ def init():
     print('')
     print('Opciones:')
 
-#Validacion de respuesta correcta
+#Correct answer validation
 def validation(y, lists):
     i = 0
     for x in lists:
@@ -36,7 +36,7 @@ def validation(y, lists):
             break
     return False
 
-#Seleccion del tamano de la pizza
+#Selection of the size of the pizza
 def viewSizePizza():
     valid = False
     print('Tamaños disponibles:')
@@ -48,7 +48,7 @@ def viewSizePizza():
         if valid == False:
             print('Seleccione un tamaño correcto')
 
-#Seleccion de los ingredientes de la Pizza
+#Selection of Pizza ingredients
 def viewIngredientsPizza():
     terminar = False
     valid = False
