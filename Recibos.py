@@ -14,10 +14,8 @@ def simple_table(spacing=1):
         data.append([ingredient.id,ingredient.nombre,str(ingredient.precio)])
 
 
-    #pdf = FPDF()
+    pdf.set_draw_color(0, 0, 0)
     pdf.set_font("Arial", size=12)
-    pdf.add_page()
-
     col_width = pdf.w / 4.5
     row_height = pdf.font_size
     for row in data:
@@ -26,18 +24,14 @@ def simple_table(spacing=1):
                      txt=item, border=1)
         pdf.ln(row_height*spacing)
 
-    #pdf.output(file)
-
 def draw_lines():
-    #pdf = FPDF()
-    pdf.add_page()
     pdf.line(10, 10, 10, 100)
     pdf.set_line_width(1)
     pdf.set_draw_color(255, 0, 0)
     pdf.line(20, 20, 100, 20)
-    #pdf.output(file)
 
 pdf = FPDF()
+pdf.add_page()
 draw_lines()
 simple_table()
 draw_lines()
