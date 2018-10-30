@@ -1,5 +1,6 @@
 import os
 import Datos
+import Clases
 
 #Clean screem
 def clear():
@@ -28,7 +29,7 @@ def init():
     print("*************************")
     print("*     Pizzería UCAB     *")
     print("*************************")
-    print("Pizza número ", numeroPizza)
+    print("Pizza número ", len(pizzaList) + 1)
     print('')
     print('Opciones:')
 
@@ -42,6 +43,12 @@ def validation(y, lists):
             break
     return False
 
+
+#a partir de aqui. crear el objeto pizza
+#lista de pizzas
+#total y sub total
+#sub total es el total de la pizza a agregar
+#total es la suma de todas las pizzas
 #Selection of the size of the pizza
 def view_size_pizza():
     valid = False
@@ -57,7 +64,7 @@ def view_size_pizza():
     return objectSize
 
 #Selection of Pizza ingredients
-def view_ingredientsp_izza():
+def view_ingredients_pizza():
     terminar = False
     valid = False
     ingredientes = []
@@ -77,32 +84,42 @@ def view_ingredientsp_izza():
                 ingredientes.append(objectIngredient)
     return ingredientes
 
-
+#Calculo de total de las pizzas
+def calculo_total_pizzas():
+    total = 0
+    for x in pizzaList:
+        total = total + x.calcularTotal()
+    return total
 
 #Main
 cont = False
 opc = False
-numeroPizza = 1
 total = 0
+pizzaList = []
+
 while cont == False:
     subtotal = 0
     init()
-    objectSize = view_size_pizza()
+    pizza = Clases.Pizza()
+    pizza.tamano = view_size_pizza()
     init()
-    ingredientes = view_ingredientsp_izza()
-    print("Usted seleccionó una pizza ",objectSize.nombre," con: ", end = "")
-    for x in ingredientes:
+    pizza.ingredientes = view_ingredients_pizza()
+    print("Usted seleccionó una pizza ",pizza.tamano.nombre," con: ", end = "")
+    for x in pizza.ingredientes:
         print(x.nombre, end = " ")
     print("")
-    print("Subtotal a pagar por una pizza ",objectSize.nombre,": ")
+
+    print("Subtotal a pagar por una pizza ",pizza.tamano.nombre,": ", pizza.calcularTotal())
     while opc == False:
+        pizzaList.append(pizza)
         fin = input("Desea continuar? [s/n]: ")
         if fin == 'n':
+            print("Total a pagar por ",len(pizzaList)," pizzas : ", calculo_total_pizzas())
+            print("")
             print('Gracias por su compra')
             cont = True
             break
         elif fin == 's':
-            numeroPizza += 1
             break
         else:
             print('Opción incorrecta')
