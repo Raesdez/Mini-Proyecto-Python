@@ -7,8 +7,8 @@ from functools import reduce
 import pickle
 
 #----------- Global Variables --------------------
-ingredientsFile = "ingredientes"
-sizesFile = "tamanos"
+ingredientsFile = "Archivos/ingredientes"
+sizesFile = "Archivos/tamanos"
 #---------------------------------------------------
 
 #----------------------- Public Service Methods ---------------------
