@@ -5,10 +5,10 @@ class Pizza:
     ingredientes = []
     tamano = ""
 
-    def __init__(self, numero=0,ingredientes=[], tamanos=""):
-        self.numero = nombre
-        self.ingredientes = precio
-        self.tamanos = tamanos
+    def __init__(self, numero=0,ingredientes=[], tamano=""):
+        self.numero = numero
+        self.ingredientes = ingredientes
+        self.tamano = tamano
 
     """ Calcula el precio total de la pizza sumando las listas que tiene """
     def calcularTotal():
