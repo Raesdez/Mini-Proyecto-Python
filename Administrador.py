@@ -2,7 +2,8 @@
 import Datos
 import os
 
-def viewProducts():
+""" Summary: Prints a list of selected products"""
+def __view_products():
     while True:
         answer = input("Indique el tipo de producto que desea consultar (i: ingrediente, t: tamano): ")
         print("")
@@ -16,12 +17,13 @@ def viewProducts():
             print("Seleccione una opcion valida")
             continue
 
-        __printList(lists)
+        __print_list(lists)
         print("")
         input("Presione cualquier tecla para volver")
         break
 
-def addProduct():
+""" Summary: Adds a product using the Datos based on the info provided"""
+def __add_product():
     while True:
         answer = input("Indique el tipo de producto que desea agregar (i: ingrediente, t: tamano): ")
 
@@ -49,10 +51,12 @@ def addProduct():
         input("Producto agregado, presione cualquier tecla para continuar")
         break
 
-def deleteProduct():
+""" Summary: Deletes a selected product"""
+def __delete_product():
     while True:
         answer = input("Indique el tipo de producto que desea eliminar (i: ingrediente, t: tamano): ")
         print("")
+        #Set the function and the list to be shown based on the choice
         if(answer == "I" or answer == "i"):
             lists = Datos.ingredientsList()
             func = Datos.deleteIngredient
@@ -65,11 +69,13 @@ def deleteProduct():
             print("Seleccione una opcion valida")
             continue
 
-        __printList(lists)
+        #Print the list
+        __print_list(lists)
         print("")
 
+        #Delete the selected object or ask again if input was wrong
         id = input("Indique el Id del producto a eliminar: ")
-        product = __searchById(lists,id)
+        product = __search_by_id(lists,id)
         if(product != None):
             func(product)
         else:
@@ -79,6 +85,7 @@ def deleteProduct():
         input("Producto eliminado, presione cualquier tecla para continuar: ")
         break
 
+""" Summary: terminates the program after users confirmation"""
 def exit():
     while True:
         answer = input("Seguro que desea salir? [s/n]: ")
@@ -92,7 +99,9 @@ def exit():
             print("Seleccione una opcion valida")
 
 #-------------------------  Private  ---------------------------------
-def __printList(lists):
+""" Summary: Prints a list of products
+    Parameters: lists: list of objects (Tamano, Ingrediente)"""
+def __print_list(lists):
     print("----------------------------------")
     i = 0
     for x in lists:
@@ -100,16 +109,19 @@ def __printList(lists):
         print(i,":",x.id,',',x.nombre,',',x.precio)
     print("----------------------------------")
 
-def __searchById(lists,id):
+""" Summary: Given a list of ingredients or sizes it returns the one whos id matched
+    Parameters: lists: the list with the objects, id: the id that needs to be matched
+    Return:     product: the object whos id matched, None: is no product id matched"""
+def __search_by_id(lists,id):
     for product in lists:
         if product.id == id:
             return product
     return None
 #-------------------------  Main  ---------------------------------
 switcher = {
-        1: viewProducts,
-        2: addProduct,
-        3: deleteProduct,
+        1: __view_products,
+        2: __add_product,
+        3: __delete_product,
         0: exit,
     }
 
