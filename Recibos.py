@@ -104,11 +104,15 @@ def __generate_pizza_tables(pizzas_list):
 #---------------- Public Method -----------------------------------------------
 """ Summary:    Called from the Client to generate the PDF
     Parameters: pizzas_list: the list of the pizzas
-    Return:     None"""
+    Return:     0: PDF created succefully, 9: unexpected error"""
 def generate_receipt(pizzas_list=[]):
-    now = str(datetime.datetime.now())      #Get the now when the function is called
-    file = file_path+"Recibo"+now+".pdf"    #Give a name to the file
-    __generate_and_save_PDF(pizzas_list,file,now)      #Generate and saves PDF
+    try:
+        now = str(datetime.datetime.now())      #Get the now when the function is called
+        file = file_path+"Recibo"+now+".pdf"    #Give a name to the file
+        __generate_and_save_PDF(pizzas_list,file,now)      #Generate and saves PDF
+        return 0
+    except:
+        return 9
 
 #------------------------------------------------------------------------------
 
