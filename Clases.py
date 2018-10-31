@@ -1,6 +1,8 @@
 class Pizza:
     """ Clase para manejar las pizzas que ordene el cliente  """
 
+    """ Clase para manejar las pizzas que ordene el cliente  """
+
     def __init__(self, numero=0,ingredientes=None, tamano=""):
         self.numero = numero
         if ingredientes is None:
@@ -16,11 +18,7 @@ class Pizza:
 class Tamano:
 
     """ Clase para definir los tamanos de las pizzas """
-    #id = "00"
-    #nombre = ""
-    #precio = 0.00
-
-    def __init__(self,id,nombre, precio):
+    def __init__(self,id="00",nombre="", precio=0.00):
         self.id = id
         self.nombre = nombre
         self.precio = precio
@@ -28,12 +26,7 @@ class Tamano:
 class Ingrediente:
 
     """ Clase para definir los ingredientes de las pizzas"""
-
-    #id = "00"
-    #nombre = ""
-    #precio = 0.00
-
-    def __init__(self, id, nombre, precio):
+    def __init__(self, id="00", nombre="", precio=0.00):
         self.id = id
         self.nombre = nombre
         self.precio = precio
