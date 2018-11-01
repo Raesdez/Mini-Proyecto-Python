@@ -116,8 +116,9 @@ while cont == False:
         fin = input("Desea continuar? [s/n]: ")
         if fin == 'n':
             print("Total a pagar por ",len(pizzaList)," pizzas : ", calculo_total_pizzas())
-            generate_receipt(pizzaList)
             print("")
+            if(generate_receipt(pizzaList)==9):
+                print("El recibo no pudo ser generado")    
             print('Gracias por su compra')
             cont = True
             break
