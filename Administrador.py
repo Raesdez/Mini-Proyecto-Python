@@ -14,10 +14,10 @@ def __view_products():
         answer = input("Indique el tipo de producto que desea consultar (i: ingrediente, t: tamano): ")
         print("")
         if(answer == "I" or answer == "i"):
-            lists = Datos.ingredientsList()
+            lists = Datos.ingredients_list()
             print("Mostrando todos los ingredientes: ")
         elif(answer == "T" or answer == "t"):
-            lists = Datos.sizesList()
+            lists = Datos.sizes_list()
             print("Mostrando todos los tamanos de pizza: ")
         else:
             print("Seleccione una opcion valida")
@@ -39,13 +39,13 @@ def __add_product():
         precio = float(input('Indique el precio del producto: '))
 
         if(answer == "I" or answer == "i"):
-            if(Datos.saveIngredient(Datos.Ingrediente(id,nombre,precio))==1):
+            if(Datos.save_ingredient(Datos.Ingrediente(id,nombre,precio))==1):
                 print("Ya existe un ingrediente con este identificador, por favor intente nuevamente")
                 continue
             print()
 
         elif(answer == "T" or answer == "t"):
-            if(Datos.saveSize(Datos.Tamano(id,nombre,precio))):
+            if(Datos.save_size(Datos.Tamano(id,nombre,precio))):
                 print("Ya existe un tamano con este identificador, por favor intente nuevamente")
                 continue
             print()
@@ -64,12 +64,12 @@ def __delete_product():
         print("")
         #Set the function and the list to be shown based on the choice
         if(answer == "I" or answer == "i"):
-            lists = Datos.ingredientsList()
-            func = Datos.deleteIngredient
+            lists = Datos.ingredients_list()
+            func = Datos.delete_ingredient
             print("Mostrando todos los ingredientes: ")
         elif(answer == "T" or answer == "t"):
-            lists = Datos.sizesList()
-            func = Datos.deleteSize
+            lists = Datos.sizes_list()
+            func = Datos.delete_size
             print("Mostrando todos los tamanos de pizza: ")
         else:
             print("Seleccione una opcion valida")

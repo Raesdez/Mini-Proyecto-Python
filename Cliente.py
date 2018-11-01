@@ -54,7 +54,7 @@ def validation(y, lists):
 def view_size_pizza():
     valid = False
     print('Tamaños disponibles:')
-    listSizePizza = Datos.sizesList()
+    listSizePizza = Datos.sizes_list()
     __printList(listSizePizza)
     while valid == False:
         size = input('Seleccione un tamaño: ')
@@ -70,7 +70,7 @@ def view_ingredients_pizza():
     valid = False
     ingredientes = []
     print('Ingredientes disponibles:')
-    listIngredientsPizza = Datos.ingredientsList()
+    listIngredientsPizza = Datos.ingredients_list()
     __printList(listIngredientsPizza)
     while terminar == False:
         ingredient = input('Seleccione un ingrediente (enter para terminar): ')

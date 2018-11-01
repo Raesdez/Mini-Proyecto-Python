@@ -7,31 +7,31 @@ from functools import reduce
 import pickle
 
 #----------- Global Variables --------------------
-ingredientsFile = "Archivos/ingredientes"
-sizesFile = "Archivos/tamanos"
+ingredients_file = "Archivos/ingredientes"
+sizes_file = "Archivos/tamanos"
 #---------------------------------------------------
 
 #----------------------- Public Service Methods ---------------------
 
 #Ingredients
-def saveIngredient(new_ingredient):
-    return __saveObject(new_ingredient,ingredientsFile)
+def save_ingredient(new_ingredient):
+    return __save_object(new_ingredient,ingredients_file)
 
-def ingredientsList():
-    return __listOfObjects(ingredientsFile)
+def ingredients_list():
+    return __list_of_objects(ingredients_file)
 
-def deleteIngredient(ingredient_to_erase):
-    return __deleteObject(ingredient_to_erase,ingredientsFile)
+def delete_ingredient(ingredient_to_erase):
+    return __delete_object(ingredient_to_erase,ingredients_file)
 
 #Sizes
-def saveSize(new_size):
-    return __saveObject(new_size,sizesFile)
+def save_size(new_size):
+    return __save_object(new_size,sizes_file)
 
-def sizesList():
-    return __listOfObjects(sizesFile)
+def sizes_list():
+    return __list_of_objects(sizes_file)
 
-def deleteSize(size_to_erase):
-    return __deleteObject(size_to_erase,sizesFile)
+def delete_size(size_to_erase):
+    return __delete_object(size_to_erase,sizes_file)
 
 #---------------------------------------------------------------------------
 
@@ -39,13 +39,13 @@ def deleteSize(size_to_erase):
 """ Summary:    Stores an object in the stated file
     Parameters: new_object: the object to be stored, file_name: the name of the file
     Return:     0: if store success, 1: object id is duplicated, 9:unexpected error"""
-def __saveObject(new_object,file_name):
+def __save_object(new_object,file_name):
     try:
         #Get stored list
-        list = __listOfObjects(file_name)
+        list = __list_of_objects(file_name)
 
         #Check if the id is already on the list
-        if(not __isIdDuplicated(list,new_object)):
+        if(not __is_id_duplicated(list,new_object)):
             #Append the new object to the list
             list.append(new_object)
             #Open file and save the list
@@ -59,7 +59,7 @@ def __saveObject(new_object,file_name):
 """ Summary:    Reads the file and return a list of the objects in that file
     Parameters: file_name: the name of the file
     Return:     object list or [] if an error ocurred"""
-def __listOfObjects(file_name):
+def __list_of_objects(file_name):
     try:
         with open(file_name,'rb') as file:
             list = pickle.load(file)
@@ -70,10 +70,10 @@ def __listOfObjects(file_name):
 """ Summary:    Searches the list of object, deletes the object searching it by id and then saves the list in file
     Parameters: object: the object to be deleted, file_name: the name of the file
     Return:     0: if everything ok, 9:unexpected error"""
-def __deleteObject(object,file_name):
+def __delete_object(object,file_name):
     try:
          #Get stored list
-         lists = __listOfObjects(file_name)
+         lists = __list_of_objects(file_name)
          #Apply filter to generate a list with the objects that dont have the object id
          lists = list(filter(lambda x: x.id != object.id,lists))
          #Open file and save the list
@@ -86,7 +86,7 @@ def __deleteObject(object,file_name):
 """ Summary:    Checks if the id of the new object exist in the file
     Parameters: list: the list of objects, new_object: the new object to check if exists
     Return:     True: if it is duplicated , False: if not exists on the list"""
-def __isIdDuplicated(list,new_object):
+def __is_id_duplicated(list,new_object):
     for object in list:
         if object.id == new_object.id:
             return True
@@ -108,13 +108,13 @@ if __name__ == '__main__':
     ingrediente.precio = float(input('Indique el precio del producto: '))
     print("")
 
-    if (saveIngredient(ingrediente) == 1):
+    if (save_ingredient(ingrediente) == 1):
         print("Ya existe este ingrediente")
     else:
         print("La lista de productos actuales")
-        imprimirIngredientes(ingredientsList())
+        imprimirIngredientes(ingredients_list())
         #print("Eliminando ",ingrediente.nombre)
-        #__eliminateObject(ingrediente,ingredientsFile)
-        #imprimirIngredientes(ingredientsList())
+        #__eliminateObject(ingrediente,ingredients_file)
+        #imprimirIngredientes(ingredients_list())
 
-    #print("Total de precio de los productos",reduce((lambda x, y: x + y),map(lambda x: x.precio, ingredientsList())))
+    #print("Total de precio de los productos",reduce((lambda x, y: x + y),map(lambda x: x.precio, ingredients_list())))
