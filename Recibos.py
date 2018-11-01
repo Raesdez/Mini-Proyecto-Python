@@ -67,6 +67,9 @@ def __generateIngredientsListHTML(ingredient_list):
     list = ""
     for ingredient in ingredient_list:
         list += ingredient.id+"("+str(ingredient.precio)+")"+", "
+
+    if list == "":
+        list = " - Margarita - "
     return list
 
 """ Summary:    Creates the portion of the pdf that contains the table with the pizzas' info
@@ -74,11 +77,12 @@ def __generateIngredientsListHTML(ingredient_list):
     Return:     table: full constructed pizzas table"""
 def __generate_pizza_tables(pizzas_list):
     pizzas_info = ""
-
+    cont = 0
     #Place the pizza info in each row of the table
     for pizza in pizzas_list:
+        cont +=1
         pizzas_info = pizzas_info+'''<tr>
-                            <td>'''+str(pizza.numero)+'''</td>
+                            <td>'''+str(cont)+'''</td>
                             <td>'''+str(pizza.tamano.nombre)+''' ('''+str(pizza.tamano.precio)+''')</td>
                             <td>'''+str(__generateIngredientsListHTML(pizza.ingredientes))+'''</td>
                             <td>'''+str(pizza.calcularTotal())+'''</td>
@@ -110,7 +114,7 @@ def generate_receipt(pizzas_list=[]):
         now = str(datetime.datetime.now())      #Get the now when the function is called
         file = file_path+"Recibo"+now+".pdf"    #Give a name to the file
         __generate_and_save_PDF(pizzas_list,file,now)      #Generate and saves PDF
-        return 0
+        return now
     except:
         return 9
 

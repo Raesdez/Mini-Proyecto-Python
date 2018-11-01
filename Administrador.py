@@ -1,6 +1,12 @@
 #---------------- Ramón Sosa ------------------
-import Datos
 import os
+import Datos
+#Clean screem
+def clear():
+    if os.name == "posix":
+        os.system ("clear")
+    elif os.name == ("ce", "nt", "dos"):
+        os.system ("cls")
 
 """ Summary: Prints a list of selected products"""
 def __view_products():
@@ -127,9 +133,9 @@ switcher = {
 
 while True:
 
-    os.system('clear')
+    clear()
     print("------------------------------------------")
-    print("Bienvenido al Administrador de la Pizzeria")
+    print("Bienvenido al Administrador de la Pizzeria UCAB")
     print("------------------------------------------")
     print("")
 
@@ -142,7 +148,7 @@ while True:
 
     #try:
     func = switcher.get(int(input("Opcion: ")), lambda: "Seleccione una opcion valida")
-    os.system('clear')
+    clear()
     func()
     #except:
         #print("Error desconocido")
