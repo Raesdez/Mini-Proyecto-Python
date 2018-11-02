@@ -1,6 +1,7 @@
 #---------------- Ramón Sosa ------------------
 import os
 import Datos
+
 #Clean screem
 def clear():
     if os.name == "posix":

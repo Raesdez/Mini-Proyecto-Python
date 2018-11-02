@@ -3,14 +3,14 @@ import Datos
 import Clases
 from Recibos import generate_receipt
 
-#Clean screem
+#Clean screen
 def clear():
     if os.name == "posix":
         os.system ("clear")
     elif os.name == ("ce", "nt", "dos"):
         os.system ("cls")
 
-#Print list
+"""Summary: Imprime la lista de los ingredientes o de las pizzas"""
 def __printList(lists):
     print("----------------------------------")
     i = 0
@@ -19,12 +19,14 @@ def __printList(lists):
         print(i,":",x.nombre,' BsS.',x.precio,' (',x.id,') ')
     print("----------------------------------")
 
+"""Summary: Devuelve un objeto, buscandolo en una lista por el id"""
 def __searchById(lists,id):
     for product in lists:
         if product.id == id:
             return product
     return None
 
+"""Summary: Inicialización de la pizzería"""
 def init():
     clear()
     print("*************************")
@@ -34,7 +36,7 @@ def init():
     print('')
     print('Opciones:')
 
-#Correct answer validation
+"""Summary: Correct answer validation"""
 def validation(y, lists):
     i = 0
     for x in lists:
@@ -45,12 +47,8 @@ def validation(y, lists):
     return False
 
 
-#a partir de aqui. crear el objeto pizza
-#lista de pizzas
-#total y sub total
-#sub total es el total de la pizza a agregar
-#total es la suma de todas las pizzas
-#Selection of the size of the pizza
+
+"""Summary: Selección del tamaño de la pizza"""
 def view_size_pizza():
     valid = False
     print('Tamaños disponibles:')
@@ -64,7 +62,7 @@ def view_size_pizza():
             print('Seleccione un tamaño correcto')
     return objectSize
 
-#Selection of Pizza ingredients
+"""Summary: Selecciona los ingredientes a agregar en una pizza"""
 def view_ingredients_pizza():
     terminar = False
     valid = False
@@ -85,7 +83,7 @@ def view_ingredients_pizza():
                 ingredientes.append(objectIngredient)
     return ingredientes
 
-#Calculo de total de las pizzas
+"""Summary: Calculo de total de las pizzas"""
 def calculo_total_pizzas():
     total = 0
     for x in pizzaList:
