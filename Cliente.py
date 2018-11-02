@@ -103,10 +103,13 @@ while cont == False:
     pizza.tamano = view_size_pizza()
     init()
     pizza.ingredientes = view_ingredients_pizza()
-    print("Usted seleccionó una pizza ",pizza.tamano.nombre," con: ", end = "")
-    for x in pizza.ingredientes:
-        print(x.nombre, end = " ")
-    print("")
+    if len(pizza.ingredientes) == 0:
+        print("Usted seleccionó una pizza ",pizza.tamano.nombre," margarita")
+    else:
+        print("Usted seleccionó una pizza ",pizza.tamano.nombre," con: ", end = "")
+        for x in pizza.ingredientes:
+            print(x.nombre, end = " ")
+        print("")
 
     print("Subtotal a pagar por una pizza ",pizza.tamano.nombre,": ", pizza.calcularTotal())
     while opc == False:
@@ -116,7 +119,7 @@ while cont == False:
             print("Total a pagar por ",len(pizzaList)," pizzas : ", calculo_total_pizzas())
             print("")
             if(generate_receipt(pizzaList)==9):
-                print("El recibo no pudo ser generado")    
+                print("El recibo no pudo ser generado")
             print('Gracias por su compra')
             cont = True
             break
