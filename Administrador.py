@@ -12,14 +12,14 @@ def clear():
 """ Summary: Prints a list of selected products"""
 def __view_products():
     while True:
-        answer = input("Indique el tipo de producto que desea consultar (i: ingrediente, t: tamano): ")
+        answer = input("Indique el tipo de producto que desea consultar (i: ingrediente, t: tamaño): ")
         print("")
         if(answer == "I" or answer == "i"):
             lists = Datos.ingredients_list()
             print("Mostrando todos los ingredientes: ")
         elif(answer == "T" or answer == "t"):
             lists = Datos.sizes_list()
-            print("Mostrando todos los tamanos de pizza: ")
+            print("Mostrando todos los tamaños de pizza: ")
         else:
             print("Seleccione una opcion valida")
             continue
@@ -32,7 +32,7 @@ def __view_products():
 """ Summary: Adds a product using the Datos based on the info provided"""
 def __add_product():
     while True:
-        answer = input("Indique el tipo de producto que desea agregar (i: ingrediente, t: tamano): ")
+        answer = input("Indique el tipo de producto que desea agregar (i: ingrediente, t: tamaño): ")
 
         #Constructing the object
         nombre = str(input('Indique el nombre del producto: '))
@@ -47,11 +47,11 @@ def __add_product():
 
         elif(answer == "T" or answer == "t"):
             if(Datos.save_size(Datos.Tamano(id,nombre,precio))):
-                print("Ya existe un tamano con este identificador, por favor intente nuevamente")
+                print("Ya existe un tamaño con este identificador, por favor intente nuevamente")
                 continue
             print()
         else:
-            print("Seleccione una opcion valida")
+            print("Seleccione una opción válida")
             continue
 
         print("")
@@ -61,7 +61,7 @@ def __add_product():
 """ Summary: Deletes a selected product"""
 def __delete_product():
     while True:
-        answer = input("Indique el tipo de producto que desea eliminar (i: ingrediente, t: tamano): ")
+        answer = input("Indique el tipo de producto que desea eliminar (i: ingrediente, t: tamaño): ")
         print("")
         #Set the function and the list to be shown based on the choice
         if(answer == "I" or answer == "i"):
@@ -71,9 +71,9 @@ def __delete_product():
         elif(answer == "T" or answer == "t"):
             lists = Datos.sizes_list()
             func = Datos.delete_size
-            print("Mostrando todos los tamanos de pizza: ")
+            print("Mostrando todos los tamaños de pizza: ")
         else:
-            print("Seleccione una opcion valida")
+            print("Seleccione una opción válida")
             continue
 
         #Print the list
@@ -86,7 +86,7 @@ def __delete_product():
         if(product != None):
             func(product)
         else:
-            print("Seleccione una opcion valida")
+            print("Seleccione una opción válida")
             continue
 
         input("Producto eliminado, presione cualquier tecla para continuar: ")
@@ -95,15 +95,17 @@ def __delete_product():
 """ Summary: terminates the program after users confirmation"""
 def exit():
     while True:
-        answer = input("Seguro que desea salir? [s/n]: ")
+        answer = input("¿Seguro que desea salir? [s/n]: ")
 
         if (answer == 's' or answer == 'S'):
             print("Hasta luego")
-            quit()
+            return 1
         elif (answer == 'n' or answer == 'N'):
             break
         else:
-            print("Seleccione una opcion valida")
+            print("Seleccione una opción válida")
+
+    return 0
 
 #-------------------------  Private  ---------------------------------
 """ Summary: Prints a list of products
@@ -121,7 +123,7 @@ def __print_list(lists):
     Return:     product: the object whos id matched, None: is no product id matched"""
 def __search_by_id(lists,id):
     for product in lists:
-        if product.id == id:
+        if product.id == id: #If Id matches it returns it
             return product
     return None
 #-------------------------  Main  ---------------------------------
@@ -131,12 +133,10 @@ switcher = {
         3: __delete_product,
         0: exit,
     }
-
 while True:
-
     clear()
     print("------------------------------------------")
-    print("Bienvenido al Administrador de la Pizzeria UCAB")
+    print("Bienvenido al Administrador de la Pizzería UCAB")
     print("------------------------------------------")
     print("")
 
@@ -147,9 +147,13 @@ while True:
     print("3: Eliminar un producto")
     print("0: Salir")
 
-    #try:
-    func = switcher.get(int(input("Opcion: ")), lambda: "Seleccione una opcion valida")
+    #Validate input
+    try:
+        func = switcher.get(int(input("Opción: ")), lambda: "Seleccione una opción válida")
+    except:
+        print("Seleccione una opción válida")
+        input()
+        continue
     clear()
-    func()
-    #except:
-        #print("Error desconocido")
+    if(func() == 1): #It is called to exit the program
+        quit()

@@ -1,8 +1,5 @@
 class Pizza:
     """ Clase para manejar las pizzas que ordene el cliente  """
-
-    """ Clase para manejar las pizzas que ordene el cliente  """
-
     def __init__(self, numero=0,ingredientes=None, tamano=""):
         self.numero = numero
         if ingredientes is None:
@@ -10,7 +7,7 @@ class Pizza:
             self.ingredientes = ingredientes
         self.tamano = tamano
 
-    """ Calcula el precio total de la pizza sumando las listas que tiene """
+    """ Calcula el precio total de la pizza sumando la lista de ingredientes y el tamano """
     def calcularTotal(self):
         suma = sum(map(lambda i: i.precio,self.ingredientes))
         return suma + self.tamano.precio
