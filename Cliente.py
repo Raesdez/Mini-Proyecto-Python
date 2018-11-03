@@ -1,7 +1,14 @@
 import os
 import Datos
 import Clases
-from Recibos import generate_receipt
+
+#If the receipt import fails because FPDF is not imported, the function is
+#redefined to return error (9)
+try:
+    from Recibos import generate_receipt
+except:
+    def generate_receipt(pizza_list):
+        return 9
 
 #Clean screen
 def clear():
